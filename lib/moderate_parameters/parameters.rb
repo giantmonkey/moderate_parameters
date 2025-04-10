@@ -137,7 +137,7 @@ module ModerateParameters
           end
         elsif non_scalar?(value)
           # Declaration { user: :name } or { user: [:name, :age, { address: ... }] }.
-          params[key] = each_element(value) do |element|
+          params[key] = each_element(value, filter[key]) do |element|
             element.instance_variable_set '@context', "Parent #{key}"
             element.moderate(controller_name, action, *Array.wrap(filter[key]))
           end
